@@ -15,6 +15,6 @@ class MyApp extends StatelessWidget {
         title: 'Coin Converter',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: Colors.black),
-        home: PriceScreen());
+        home: const PriceScreen());
   }
 }

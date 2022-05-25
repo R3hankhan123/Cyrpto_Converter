@@ -26,31 +26,32 @@ const List<String> currencyLst = [
 const List<String> cryptoList = [
   'BTC',
   'ETH',
-  //'LTC',
+  'LTC',
   'XRP',
   'SOL',
-  //'SHIB',
-  //'DOGE',
-  //'MATIC',
+  'DOGE',
+  'MATIC',
   'LUNA',
-  //'THETA'
+  'THETA',
 ];
 
 class FetchData {
   static Future<List<String>> getData(String selectedCurreny) async {
     List<String> prices = [];
-    String Url;
+    String url;
     for (int i = 0; i < cryptoList.length; i++) {
-      Url =
+      url =
           'https://rest.coinapi.io/v1/exchangerate/${cryptoList[i]}/$selectedCurreny';
-      Uri url = Uri.parse(Url);
-      http.Response response = await http.get(url,
+      Uri uri = Uri.parse(url);
+      http.Response response = await http.get(uri,
           headers: {'X-CoinAPI-Key': '0D199DE9-5E0F-4474-83BE-65EACD5B8AB1'});
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        prices.add(data['rate'].toString());
+        double Price = data['rate'];
+        prices.add(Price.toStringAsFixed(4));
       } else {
-        prices.add('0.0');
+        print(response.statusCode);
+        throw 'Problem with the get request';
       }
     }
     return prices;

@@ -42,7 +42,7 @@ class _PriceScreenState extends State<PriceScreen> {
         ),
       );
     } catch (e) {
-      return const Text('An error occured');
+      return const Text('Loading...');
     }
   }
 
@@ -68,6 +68,7 @@ class _PriceScreenState extends State<PriceScreen> {
                       .map((crypto) => SizedBox(
                             width: double.infinity,
                             child: Card(
+                              color: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -83,30 +84,29 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
             Container(
-              height: 150,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(bottom: 30),
-              color: Colors.blue[900],
-              child: CupertinoPicker(
-                  scrollController: FixedExtentScrollController(
-                      initialItem: currencyLst.indexOf(selectedCurrency)),
-                  backgroundColor: Colors.blue[900],
-                  offAxisFraction: 0.1,
-                  useMagnifier: true,
-                  magnification: 1.3,
-                  looping: true,
-                  itemExtent: 45,
-                  onSelectedItemChanged: (selectedIndex) {
-                    setState(() {
-                      selectedCurrency = currencyLst[selectedIndex];
-                    });
-                  },
-                  children: currencyLst
-                      .map((currency) => Center(
-                          child: Text(currency,
-                              style: const TextStyle(color: Colors.black))))
-                      .toList()),
-            )
+                height: 150,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(bottom: 30),
+                color: Colors.blue[900],
+                child: CupertinoPicker(
+                    useMagnifier: true,
+                    magnification: 1.2,
+                    offAxisFraction: 0.2,
+                    scrollController: FixedExtentScrollController(
+                        initialItem: currencyLst.indexOf(selectedCurrency)),
+                    backgroundColor: Colors.blue[900],
+                    itemExtent: 45.0,
+                    onSelectedItemChanged: (selectedIndex) {
+                      setState(() {
+                        selectedCurrency = currencyLst[selectedIndex];
+                      });
+                      setprice();
+                    },
+                    children: currencyLst
+                        .map((currency) => Center(
+                            child: Text(currency,
+                                style: const TextStyle(color: Colors.black))))
+                        .toList()))
           ]),
     );
   }
