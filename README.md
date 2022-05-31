@@ -1,7 +1,7 @@
 
 # Crypto Converter
 
-It is an app which tells the rate of differnt cryptocurrency in different currencies
+It is an app which tells the rate of different cryptocurrency in different currencies
 The API is provided by coinapi.io
 
 ## API Reference
